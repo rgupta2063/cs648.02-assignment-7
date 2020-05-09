@@ -65,6 +65,7 @@ export default class ProductList extends React.Component {
           history.push({ pathname: '/products', search });
         }
         newList.splice(index, 1);
+        this.loadCount();
         return { products: newList };
       });
     } else {
@@ -76,9 +77,9 @@ export default class ProductList extends React.Component {
     const query = `query {
       productCounts
     }`;
-    const data = await graphQLFetch(query);
-    if (data) {
-      this.setState({ count: data.productCounts });
+    const result = await graphQLFetch(query);
+    if (result) {
+      this.setState({ count: result.productCounts });
     }
   }
 
